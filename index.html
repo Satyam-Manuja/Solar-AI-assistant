@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Rooftop Analysis Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌞 Solar Rooftop Analysis Tool</h1>
+            <p>AI-Powered Solar Installation Assessment & ROI Calculator</p>
+        </div>
+
+        <div class="main-card">
+            <div class="upload-section">
+                <div class="drop-zone" id="dropZone">
+                    <div class="upload-icon">☁️</div>
+                    <div class="upload-text">Drop your rooftop image here</div>
+                    <div class="upload-subtext">or click to browse (JPG, PNG, WebP - Max 10MB)</div>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+                <button class="btn" onclick="document.getElementById('fileInput').click()">
+                    📁 Choose Image
+                </button>
+                <button class="btn" id="analyzeBtn" onclick="analyzeImage()" disabled>
+                    🔍 Analyze Solar Potential
+                </button>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing rooftop for solar potential...</p>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                    This may take 30-60 seconds
+                </p>
+            </div>
+
+            <div class="preview-section" id="previewSection">
+                <img id="imagePreview" class="image-preview" alt="Rooftop Preview">
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3><span class="icon">🏠</span>Rooftop Analysis</h3>
+                        <div class="metric">
+                            <span class="metric-label">Usable Area</span>
+                            <span class="metric-value" id="usableArea">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Roof Condition</span>
+                            <span class="metric-value" id="roofCondition">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Optimal Tilt</span>
+                            <span class="metric-value" id="optimalTilt">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Shading Level</span>
+                            <span class="metric-value" id="shadingLevel">-</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3><span class="icon">⚡</span>Solar Potential</h3>
+                        <div class="metric">
+                            <span class="metric-label">System Size</span>
+                            <span class="metric-value" id="systemSize">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Annual Generation</span>
+                            <span class="metric-value" id="annualGeneration">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Efficiency Rating</span>
+                            <span class="metric-value" id="efficiencyRating">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">CO₂ Offset</span>
+                            <span class="metric-value" id="co2Offset">-</span>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3><span class="icon">💰</span>Financial Analysis</h3>
+                        <div class="metric">
+                            <span class="metric-label">Installation Cost</span>
+                            <span class="metric-value" id="installationCost">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Annual Savings</span>
+                            <span class="metric-value" id="annualSavings">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Payback Period</span>
+                            <span class="metric-value" id="paybackPeriod">-</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">25-Year ROI</span>
+                            <span class="metric-value" id="roi25Year">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recommendations" id="recommendations">
+                    <h3><span class="icon">💡</span>Professional Recommendations</h3>
+                    <div id="recommendationsList"></div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 20px; color: #1e293b;">📊 25-Year Financial Projection</h3>
+                    <canvas id="financialChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
